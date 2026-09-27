@@ -1,0 +1,79 @@
+    1  getent passwd 1234
+    2  id user1 
+    3  getent group students
+    4  sudo useradd -m -u 1234 user1
+    5  id user1
+    6  sudo groupadd students
+    7  getent group students
+    8  sudo usermod -aG students user1
+    9  getent group students
+   10  sudo chage -M 90 user1
+   11  sudo chage -l user1
+   12  sudo passwd user1
+   13  sudo find / -type f -perm -4000 -print 2>/dev/null
+   14  ls -l /usr/bin/sudo
+   15  sudo find / -type f -perm -4000 -print 2>/dev/null > ~/setuid-files.out
+   16  cat ~/setuid-files.out
+   17  ps -eo ruid,euid,pid,comm
+   18  ps -eo ruid,euid,pid,user,comm,args
+   19  ps -eo ruid,euid,pid,user,comm | awk 'NR==1 || ($1 >= 1000 && $1 < 65534 && $2 == 0)'
+   20  ps -eo ruid,euid,pid,user,comm | awk 'NR==1 || ($1 >= 1000 && $1 < 65534 && $2 == 0)' > ~/monitoring-processes.out
+   21  cat ~/monitoring-processes.out
+   22  sudo -u user1 /usr/bin/cat /etc/shadow
+   23  sudo cp /usr/bin/cat /home/user1/cat-suid
+   24  sudo chown root:root /home/user1/cat-suid
+   25  sudo chmod 4755 /home/user1/cat-suid
+   26  sudo ls -l /home/user1/cat-suid
+   27  sudo -u user1 /home/user1/cat-suid /etc/shadow
+   28  sudo cp /usr/bin/chown /home/user1/chown-cap
+   29  sudo ls -l /home/user1/chown-cap
+   30  sudo -u user1 getcap /home/user1/chown-cap
+   31  sudo -u user1 touch /home/user1/cap-test.txt
+   32  sudo -u user1 ls -l /home/user1/cap-test.txt
+   33  sudo -u user1 /usr/bin/chown root /home/user1/cap-test.txt
+   34  sudo -u user1 ls -l /home/user1/cap-test.txt
+   35  sudo setcap cap_chown=ep /home/user1/chown-cap
+   36  sudo -u user1 getcap /home/user1/chown-cap
+   37  sudo -u user1 /home/user1/chown-cap root /home/user1/cap-test.txt
+   38  sudo -u user1 ls -l /home/user1/cap-test.txt
+   39  sudo visudo
+   40  sudo visudo -c
+   41  sudo -l -U user1
+   42  sudo -u user1 /usr/bin/date 092723402026.00
+   43  date
+   44  sudo -u user1 sudo /usr/bin/date 092800072026.06
+   45  date
+   46  sudo -u user1 sudo /usr/bin/id
+   47  sudo reboot
+   48  id user1
+   49  sudo chage -l user1
+   50  sudo ls -l /home/user1/cat-suid
+   51  sudo -u user1 getcap /home/user1/chown-cap
+   52  sudo -l -U user1
+   53  clear
+   54  echo 374907
+   55  mkdir -p ~/mephi-linux-security-2026
+   56  cp ~/setuid-files.out ~/mephi-linux-security-2026/setuid-files.out
+   57  cp ~/privileged-processes.out ~/mephi-linux-security-2026/privileged-processes.out
+   58  cp ~/monitoring-processes.out ~/mephi-linux-security-2026/monitoring-processes.out
+   59  cp ~/setuid-files.out ~/mephi-linux-security-2026/monitoring-files.out
+   60  stat /home/user1 > ~/mephi-linux-security-2026/stat.out
+   61  stat /home/user1/cat-suid >> ~/mephi-linux-security-2026/stat.out
+   62  sudo stat /home/user1/cat-suid >> ~/mephi-linux-security-2026/stat.out
+   63  sudo stat /home/user1/chown-cap >> ~/mephi-linux-security-2026/stat.out
+   64  cat ~/mephi-linux-security-2026/stat.out
+   65  sudo -u user1 getcap /home/user1/chown-cap > ~/mephi-linux-security-2026/getcap.out
+   66  cat ~/mephi-linux-security-2026/getcap.out
+   67  mkdir -p ~/mephi-linux-security-2026/etc
+   68  cp /etc/passwd ~/mephi-linux-security-2026/etc/passwd
+   69  cp /etc/group ~/mephi-linux-security-2026/etc/group
+   70  sudo cp /etc/sudoers ~/mephi-linux-security-2026/etc/sudoers
+   71  sudo chown cme005:cme005 ~/mephi-linux-security-2026/etc/sudoers
+   72  sudo cp /etc/shadow ~/mephi-linux-security-2026/etc/shadow
+   73  sudo chown cme005:cme005 ~/mephi-linux-security-2026/etc/shadow
+   74  ls -l ~/mephi-linux-security-2026/etc/shadow
+   75  mv /media/sf_REDOS_SHARED/mephi-screenshot.png ~/mephi-linux-security-2026/
+   76  ls -l ~/mephi-linux-security-2026/mephi-screenshot.png
+   77  ls ~/mephi-linux-security-2026
+   78  ls ~/mephi-linux-security-2026/etc
+   79  history > ~/mephi-linux-security-2026/history.out
